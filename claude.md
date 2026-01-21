@@ -1,43 +1,26 @@
-# Claude Project Memory: Adversarial Spec Plugin
-
-
-## 🔧 Critical Project Settings
-
-### Python Environment
-- **ALWAYS use `uv` for Python commands in this project**
-- Never use `pip` or `python3` directly
-- Example: `uv run python script.py` or `uv run --with package python script.py`
-
-### API Keys Location
-
-
----
-
-## 📁 Project Structure
-
-
----
-
-## 🚀 How to Run Adversarial Debate
+# Adversarial Spec Plugin
 
 ## Commands
-- `uv run python src/main.py`: Run main script
-- `uv run pytest`: Run all tests
-- `uv run pytest tests/test_file.py::test_name`: Run single test
-- `uv sync`: Install dependencies
-- `uv add <package>`: Add dependency
+- `uv run --no-project --with litellm --with python-dotenv python check_apis.py`: Test API keys (OpenAI, Gemini)
+- `uv run --with litellm python skills/adversarial-spec/scripts/debate.py providers`: List available LLM providers
+- `uv add <package>`: Add dependency (when using uv project mode)
 
-## Architecture
-- `src/`: Source code
-- `tests/`: Test files
-- `docs/`: Documentation
+## Python Environment
+- **Always use `uv`** for Python commands in this project
+- Never use `pip` or `python3` directly
+- Use `--no-project` flag to avoid pyproject.toml errors
+
+## API Configuration
+- API keys stored in `.env` (project root)
+- See [Issue #1](https://github.com/ciaranq/adversarial-spec/issues/1) for API setup docs
+- Current status: Gemini ✅ working, OpenAI ❌ needs billing credits
 
 ## Key Files
-- [List important files Claude should know about]
+- `check_apis.py`: Validates API keys for OpenAI & Gemini
+- `.env`: API keys (gitignored, never commit)
+- `skills/adversarial-spec/`: Plugin skill directory
 
-## Testing
-- Run single tests for speed, not full suite
-- Avoid mocks unless necessary
-
-## Project-Specific Notes
-- [Any quirks, gotchas, or unusual patterns]
+## Project Notes
+- This repo contains the plugin/agent files, not the Python package
+- pyproject.toml has naming issues - use `--no-project` when running scripts
+- Client secret files (`*client_secret*.json`) are gitignored for security
